@@ -7,6 +7,7 @@ variable "vpc_security_group_id" {}
 variable "access_key" {}
 variable "secret_key" {}
 variable "region" {}
+variable "size" {}
 
 provider "aws" {
   access_key = "${var.access_key}"
@@ -21,7 +22,7 @@ resource "aws_key_pair" "instance_keypair" {
 
 resource "aws_instance" "instance" {
   ami           = "${var.image}"
-  instance_type = "t2.medium"
+  instance_type = "${var.size}"
   key_name = "${aws_key_pair.instance_keypair.key_name}"
   subnet_id = "${var.subnet}"
   vpc_security_group_ids = ["${var.vpc_security_group_id}"]
