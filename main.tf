@@ -46,7 +46,7 @@ resource "aws_instance" "instance" {
   subnet_id                   = var.subnet
   vpc_security_group_ids      = ["${var.vpc_security_group_id}"]
   associate_public_ip_address = var.associate_public_ip
-  user_data_base64            = "${var.cloud-config}"
+  user_data                   = "${var.cloud-config}"
   tags = {
     Name        = "${var.name}"
     Owner       = "${var.tag_owner}"
