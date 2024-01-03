@@ -26,6 +26,7 @@ variable "tag_owner" {
 variable "volume_type" {
   default = "gp3"
 }
+variable "cloud-config" {}
 
 provider "aws" {
   access_key = var.access_key
@@ -45,6 +46,7 @@ resource "aws_instance" "instance" {
   subnet_id                   = var.subnet
   vpc_security_group_ids      = ["${var.vpc_security_group_id}"]
   associate_public_ip_address = var.associate_public_ip
+  user_data_base64            = "${var.cloud-config}"
   tags = {
     Name        = "${var.name}"
     Owner       = "${var.tag_owner}"
