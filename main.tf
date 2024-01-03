@@ -44,7 +44,7 @@ resource "aws_instance" "instance" {
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.instance_keypair.key_name
   subnet_id                   = var.subnet
-  vpc_security_group_ids      = var.vpc_security_group_id
+  vpc_security_group_ids      = ["${var.vpc_security_group_id}"]
   associate_public_ip_address = var.associate_public_ip
   user_data                   = var.cloud-config
   tags = {
