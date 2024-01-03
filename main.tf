@@ -44,16 +44,16 @@ resource "aws_instance" "instance" {
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.instance_keypair.key_name
   subnet_id                   = var.subnet
-  vpc_security_group_ids      = ["${var.vpc_security_group_id}"]
+  vpc_security_group_ids      = var.vpc_security_group_id
   associate_public_ip_address = var.associate_public_ip
-  user_data                   = "${var.cloud-config}"
+  user_data                   = var.cloud-config
   tags = {
-    Name        = "${var.name}"
-    Owner       = "${var.tag_owner}"
-    provisioner = "${var.tag_provisioner}"
+    Name        = var.name
+    Owner       = var.tag_owner
+    provisioner = var.tag_provisioner
   }
   root_block_device {
-    volume_type           = "${var.volume_type}"
+    volume_type           = var.volume_type
     volume_size           = var.disk
     encrypted             = var.volume_encrypted
     delete_on_termination = var.volume_delete_on_termination
